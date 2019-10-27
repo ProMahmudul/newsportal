@@ -1,0 +1,8 @@
+@font-face {
+	font-family: 'Kiron';
+	src: url('palo-internal/kiron2/Kiron.eot') format('embedded-opentype'),
+       url('palo-internal/kiron2/Kiron.woff') format('woff'), 
+       url('palo-internal/kiron2/Kiron.ttf')  format('truetype'),
+	   url('Kiron.otf')  format('truetype'),
+       url('palo-internal/kiron2/Kiron.svg') format('svg'); 
+}
