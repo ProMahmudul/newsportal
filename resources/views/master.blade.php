@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <link rel="shortcut icon" href="{{ asset('frontend') }}/assets/favicon.ico"/>
-    <link rel="icon" type="image/ico" href="{{ asset('frontend') }}/assets/favicon.ico"/>
+    @php
+        $setting = \App\Setting::orderBy('id', 'DESC')->first();
+    @endphp
+    <link rel="shortcut icon" href="@if($setting) {{ Storage::url($setting->favicon) }} @endif"/>
+    <link rel="icon" type="image/ico" href="@if($setting) {{ Storage::url($setting->favicon) }} @endif"/>
 
     <style type="text/css">
         body {
@@ -10,10 +13,10 @@
         }
     </style>
 
-    <link href="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/css/smoothness/jquery-ui-1.9.2.custom.min.css"
+    <link href="{{ asset('frontend') }}/assets/contents/assets/jquery/css/smoothness/jquery-ui-1.9.2.custom.min.css"
           media="all"
           rel="stylesheet" type="text/css"/>
-    <link href="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/js/swiper/swiper.min.css"
+    <link href="{{ asset('frontend') }}/assets/contents/assets/jquery/js/swiper/swiper.min.css"
           media="all" rel="stylesheet" type="text/css"/>
     <link href="{{ asset('frontend') }}/assets/contents/widgets/styles/style.css" media="all" rel="stylesheet"
           type="text/css"/>
@@ -33,21 +36,21 @@
 
     <script type="text/javascript" src="{{ asset('frontend') }}/assets/contents/themes/public/js/core.js"></script>
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/js/jquery-1.9.1.min.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/jquery/js/jquery-1.9.1.min.js"></script>
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/js/jquery-ui-1.9.2.custom.min.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/jquery/js/jquery-ui-1.9.2.custom.min.js"></script>
 
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/js/swiper/swiper.jquery.min.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/jquery/js/swiper/swiper.jquery.min.js"></script>
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jquery/js/jquery-ui-timepicker-addon.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/jquery/js/jquery-ui-timepicker-addon.js"></script>
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/jadewits/jquery.jw.ari.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/jadewits/jquery.jw.ari.js"></script>
     <script type="text/javascript" src="{{ asset('frontend') }}/assets/contents/themes/public/js/custom.js"></script>
     <script type="text/javascript"
-            src="{{ asset('frontend') }}/assets/contents/{{ asset('frontend') }}/assets/customjs/fade.js"></script>
+            src="{{ asset('frontend') }}/assets/contents/assets/customjs/fade.js"></script>
     <script async src="{{ asset('frontend') }}/assets/gtag/js_id_UA-11355905-1.js"></script>
-    <script async='async' src='tag/js/gpt.js'></script>
+    <script async='async' src='{{ asset('frontend') }}/assets/tag/js/gpt.js'></script>
 
     <link type="text/css" href="{{ asset('frontend') }}/assets/palo-internal/paloweb-content-style.css" media="all"
           rel="stylesheet"/>
@@ -56,7 +59,8 @@
     <link type="text/css" href="{{ asset('frontend') }}/assets/palo-internal/kiron2/Kiron.css" media="all"
           rel="stylesheet"/>
     <link rel="stylesheet" type="text/css"
-          href="{{ asset('frontend') }}/assets/{{ asset('frontend') }}/assets/css/custom.css">
+          href="{{ asset('frontend') }}/assets/css/custom.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
 </head>
 
 <body class="page_color_ jw_body_page_id_37 jw_body_content_id_ page_home_landing">

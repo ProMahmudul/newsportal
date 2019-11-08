@@ -3,9 +3,11 @@
 @section('css')
     <link rel="stylesheet" href="{{ asset('admin') }}/vendor/datatables/dataTables.bootstrap4.min.css">
 @endsection
-
+@php
+    $setting = \App\Setting::orderBy('id', 'DESC')->first();
+@endphp
 @section('page-title')
-    Category - Stock Management
+    Category - @if($setting) {{ $setting->site_title }} @endif
 @endsection
 
 @section('page-heading')
@@ -125,11 +127,11 @@
                                    data-target="#update-supplier">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form id="delete-form" action="{{ route('category.delete' ) }}" method="POST">
-                                    @csrf
-                                    <input type="hidden" name="id" value="{{ $category->id }}">
-                                    <button class="btn btn-danger btn-circle btn-sm" onclick="if (!confirm('Are you sure to delete!')) return false; "><i class="fas fa-trash"></i> </button>
-                                </form>
+                                {{--<form id="delete-form" action="{{ route('category.delete' ) }}" method="POST">--}}
+                                    {{--@csrf--}}
+                                    {{--<input type="hidden" name="id" value="{{ $category->id }}">--}}
+                                    {{--<button class="btn btn-danger btn-circle btn-sm" onclick="if (!confirm('Are you sure to delete!')) return false; "><i class="fas fa-trash"></i> </button>--}}
+                                {{--</form>--}}
                             </td>
                         </tr>
                     @endforeach

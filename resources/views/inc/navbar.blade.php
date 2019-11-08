@@ -6,9 +6,12 @@
             <div class="header">
                 <!--logo-->
                 <h1 class="site_logo">
+                    @php
+                        $setting = \App\Setting::orderBy('id', 'DESC')->first();
+                            @endphp
                     <a href="{{ url('/') }}"><img height="46"
-                                                                    src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/Prothom-Alo.png"
-                                                                    alt="প্রথম আলো"/></a>
+                                                  src="@if($setting) {{ Storage::url($setting->logo) }} @endif"
+                                                  alt="@if($setting) {{ $setting->site_title }} @endif"/></a>
                 </h1>
                 <div class="header_right_part">
                     <div class="header_right_inner">
@@ -20,137 +23,85 @@
                                     <div class="big_menu_top">
                                         <div class="all-menu">
                                             <ul id="13">
-                                                <li class="menu_page_id_37 menu_color_"><a class="static "
-                                                                                           href="{{ asset('frontend') }}/assets/home.html">প্রচ্ছদ</a>
-                                                </li>
-                                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">বাংলাদেশ</a>
-                                                </li>
-                                                <li class="menu_page_id_153 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">আন্তর্জাতিক</a>
-                                                </li>
-                                                <li class="menu_page_id_189 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">অর্থনীতি</a>
-                                                </li>
-                                                <li class="menu_page_id_246 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">মতামত</a>
-                                                </li>
-                                                <li class="menu_page_id_216 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">খেলা</a>
-                                                </li>
-                                                <li class="menu_page_id_390 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">বিনোদন</a>
-                                                </li>
-                                                <li class="menu_page_id_474 menu_color_"><a class="static "
-                                                                                            href="{{ asset('frontend') }}/assets/#">ফিচার</a>
-                                                </li>
-                                                <li class="menu_page_id_324 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">বিজ্ঞান
-                                                        ও
-                                                        প্রযুক্তি</a></li>
-                                                <li class="menu_page_id_285 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">জীবনযাপন</a>
-                                                </li>
-                                                <li class="menu_page_id_363 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">শিক্ষা</a>
-                                                </li>
-                                                <li class="menu_page_id_463 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">শিল্প
-                                                        ও
-                                                        সাহিত্য</a></li>
-                                                <li class="menu_page_id_438 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">আমরা</a>
-                                                </li>
-                                                <li class="menu_page_id_493 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">পাঁচমিশালি</a>
-                                                </li>
-                                                <li class="menu_page_id_504 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">বিশেষ
-                                                        সংখ্যা</a></li>
-                                                <li class="menu_page_id_536 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#"
-                                                                                            target="_blank">উত্তর
-                                                        আমেরিকা</a></li>
-                                                <li class="menu_page_id_ menu_color_"><a class=" "
-                                                                                         href="{{ asset('frontend') }}/assets/#"
-                                                                                         target="_blank">ইপেপার</a></li>
-                                                <li class="menu_page_id_824 menu_color_"><a class="dynamic "
-                                                                                            href="{{ asset('frontend') }}/assets/#">চাকরি</a>
-                                                </li>
+                                                @foreach($categories as $category)
+                                                    <li class="menu_page_id_37 menu_color_"><a class="static "
+                                                                                               href="{{ route('category.post', $category->id) }}"> {{ $category->name }} </a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
-                                        <div class="special_menu">
-                                            <ul>
-                                                <li><a class="image_menu_icon" href="{{ asset('frontend') }}/assets/#">ছবি</a>
-                                                </li>
-                                                <li><a class="video_menu_icon" href="{{ asset('frontend') }}/assets/#">ভিডিও</a>
-                                                </li>
-                                                <li><a class="archive_menu_icon"
-                                                       href="{{ asset('frontend') }}/assets/#">আর্কাইভ</a></li>
-                                            </ul>
-                                        </div>
+                                        {{--<div class="special_menu">--}}
+                                        {{--<ul>--}}
+                                        {{--<li><a class="image_menu_icon" href="{{ asset('frontend') }}/assets/#">ছবি</a>--}}
+                                        {{--</li>--}}
+                                        {{--<li><a class="video_menu_icon" href="{{ asset('frontend') }}/assets/#">ভিডিও</a>--}}
+                                        {{--</li>--}}
+                                        {{--<li><a class="archive_menu_icon"--}}
+                                        {{--href="{{ asset('frontend') }}/assets/#">আর্কাইভ</a></li>--}}
+                                        {{--</ul>--}}
+                                        {{--</div>--}}
                                     </div>
-                                    <div class="big_menu_bottom">
-                                        <div class="bmenu_bottom_left">
-                                            <div class="bmenu_bottom_toplinks">
-                                                <ul id="6">
-                                                    <li class="menu_page_id_540 menu_color_"><a class="static "
-                                                                                                href="{{ asset('frontend') }}/assets/#"
-                                                                                                target="_blank">বিজ্ঞাপন</a>
-                                                    </li>
-                                                    <li class="menu_page_id_544 menu_color_"><a class="static "
-                                                                                                href="{{ asset('frontend') }}/assets/#"
-                                                                                                target="_blank">সার্কুলেশন</a>
-                                                    </li>
-                                                    <li class="menu_page_id_820 menu_color_"><a class="static "
-                                                                                                href="{{ asset('frontend') }}/assets/#"
-                                                                                                target="_blank">পবিত্র
-                                                            হজ</a></li>
-                                                    <li class="menu_page_id_736 menu_color_"><a class="dynamic archive"
-                                                                                                href="{{ asset('frontend') }}/assets/#"
-                                                                                                target="_blank">দূর
-                                                            পরবাস</a></li>
-                                                    <li class="menu_page_id_536 menu_color_"><a class="dynamic "
-                                                                                                href="{{ asset('frontend') }}/assets/#"
-                                                                                                target="_blank">উত্তর
-                                                            আমেরিকা</a></li>
-                                                </ul>
-                                            </div>
+                                    {{--<div class="big_menu_bottom">--}}
+                                    {{--<div class="bmenu_bottom_left">--}}
+                                    {{--<div class="bmenu_bottom_toplinks">--}}
+                                    {{--<ul id="6">--}}
+                                    {{--<li class="menu_page_id_540 menu_color_"><a class="static "--}}
+                                    {{--href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank">বিজ্ঞাপন</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="menu_page_id_544 menu_color_"><a class="static "--}}
+                                    {{--href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank">সার্কুলেশন</a>--}}
+                                    {{--</li>--}}
+                                    {{--<li class="menu_page_id_820 menu_color_"><a class="static "--}}
+                                    {{--href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank">পবিত্র--}}
+                                    {{--হজ</a></li>--}}
+                                    {{--<li class="menu_page_id_736 menu_color_"><a class="dynamic archive"--}}
+                                    {{--href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank">দূর--}}
+                                    {{--পরবাস</a></li>--}}
+                                    {{--<li class="menu_page_id_536 menu_color_"><a class="dynamic "--}}
+                                    {{--href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank">উত্তর--}}
+                                    {{--আমেরিকা</a></li>--}}
+                                    {{--</ul>--}}
+                                    {{--</div>--}}
 
-                                            <div class="bmenu_bottom_imagelinks">
-                                                <ul>
-                                                    <li><a href="{{ asset('frontend') }}/assets/#"
-                                                           target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/2221_icon.png"
-                                                                        alt=""/></span>২২২২১</a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/#"
-                                                           target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/trust_icon.png"
-                                                                        alt=""/></span>ট্রাস্ট</a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/#"
-                                                           target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/pchinta_icon.png"
-                                                                        alt=""/></span>প্রতিচিন্তা</a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/#"
-                                                           target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/cache/images/32X27X1/uploads/media/2018/09/24/e483aba8dfa8077ce2cb0b8e2429cc63-5ba8829143ed0.png"
-                                                                        alt="কিশোর আলো"/></span>কিশোর আলো</a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/https://bit.ly/1yJDU9O"
-                                                           target="_blank"
-                                                           rel="nofollow"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/abcradio_icon.png"
-                                                                        alt=""/></span>abc রেডিও</a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/#"
-                                                           target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/cache/images/87x32x1/cache/uploads/media/2018/08/14/331e6cfb410b31c8288e18745ac83e24-5b72068060ea9.png"
-                                                                        alt=""/></span></a></li>
-                                                    <li><a href="{{ asset('frontend') }}/assets/" target="_blank"><span><img
-                                                                        src="{{ asset('frontend') }}/assets/contents/cache/images/57x32x1/uploads/media/2019/09/07/b262b1f694bfce927c8a3bad7c2665cf-5d738d3da3193.png"
-                                                                        alt="প্রথমা"/> </span>প্রথমা</a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="bmenu_bottom_imagelinks">--}}
+                                    {{--<ul>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/2221_icon.png"--}}
+                                    {{--alt=""/></span>২২২২১</a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/trust_icon.png"--}}
+                                    {{--alt=""/></span>ট্রাস্ট</a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/pchinta_icon.png"--}}
+                                    {{--alt=""/></span>প্রতিচিন্তা</a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/cache/images/32X27X1/uploads/media/2018/09/24/e483aba8dfa8077ce2cb0b8e2429cc63-5ba8829143ed0.png"--}}
+                                    {{--alt="কিশোর আলো"/></span>কিশোর আলো</a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/https://bit.ly/1yJDU9O"--}}
+                                    {{--target="_blank"--}}
+                                    {{--rel="nofollow"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/themes/public/style/images/abcradio_icon.png"--}}
+                                    {{--alt=""/></span>abc রেডিও</a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/#"--}}
+                                    {{--target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/cache/images/87x32x1/cache/uploads/media/2018/08/14/331e6cfb410b31c8288e18745ac83e24-5b72068060ea9.png"--}}
+                                    {{--alt=""/></span></a></li>--}}
+                                    {{--<li><a href="{{ asset('frontend') }}/assets/" target="_blank"><span><img--}}
+                                    {{--src="{{ asset('frontend') }}/assets/contents/cache/images/57x32x1/uploads/media/2019/09/07/b262b1f694bfce927c8a3bad7c2665cf-5d738d3da3193.png"--}}
+                                    {{--alt="প্রথমা"/> </span>প্রথমা</a></li>--}}
+                                    {{--</ul>--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
+                                    {{--</div>--}}
                                 </div>
                             </div>
                         </div>
@@ -246,19 +197,19 @@
                                 <ul>
                                     <li>
                                         <a rel="nofollow" target="_blank" class="facebook"
-                                           href="{{ asset('frontend') }}/assets/https://www.facebook.com/DailyProthomAlo"><span>Facebook</span></a>
+                                           href=""><span>Facebook</span></a>
                                     </li>
                                     <li>
                                         <a rel="nofollow" target="_blank" class="twitter"
-                                           href="{{ asset('frontend') }}/assets/https://twitter.com/ProthomAlo"><span>Twitter</span></a>
+                                           href=""><span>Twitter</span></a>
                                     </li>
                                     <li>
                                         <a rel="nofollow" target="_blank" class="youtube"
-                                           href="{{ asset('frontend') }}/assets/https://www.youtube.com/c/ProthomAlo"><span>YouTube</span></a>
+                                           href=""><span>YouTube</span></a>
                                     </li>
                                     <li>
                                         <a rel="nofollow" target="_blank" class="instagram"
-                                           href="{{ asset('frontend') }}/assets/https://www.instagram.com/prothomalo/"><span>Instagram</span></a>
+                                           href=""><span>Instagram</span></a>
                                     </li>
                                 </ul>
                             </div>
@@ -271,43 +222,87 @@
                     <div id="main_menu" class="main_menu">
                         <ul id="9">
                             {{--@php--}}
-                                {{--$last_p = \App\Category::orderBy('id', 'DESC')->first();--}}
-                                {{--$last_insert_id = $last_p->id ;--}}
-                                {{--$l_id = array();--}}
-                                {{--for($i = 0; $i < 6; $i++){--}}
-                                    {{--$l_id[] = $last_insert_id - $i;--}}
-                                {{--}--}}
+                            {{--$last_p = \App\Category::orderBy('id', 'DESC')->first();--}}
+                            {{--$last_insert_id = $last_p->id ;--}}
+                            {{--$l_id = array();--}}
+                            {{--for($i = 0; $i < 6; $i++){--}}
+                            {{--$l_id[] = $last_insert_id - $i;--}}
+                            {{--}--}}
 
                             {{--$posts = \App\Post::where('status', 1)->orderBy('id', 'DESC')->get()->except($l_id)->take(4);--}}
                             {{--@endphp--}}
-                            <li class="menu_page_id_102 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 3) }}">বাংলাদেশ</a>
-                            </li>
-                            <li class="menu_page_id_153 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 4) }}">আন্তর্জাতিক</a>
-                            </li>
-                            <li class="menu_page_id_189 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 5) }}">অর্থনীতি</a>
-                            </li>
-                            <li class="menu_page_id_246 menu_color_"><a class="dynamic "
-                                                                        href="">মতামত</a>
-                            </li>
-                            <li class="menu_page_id_216 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 6) }}">খেলা</a>
-                            </li>
-                            <li class="menu_page_id_390 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 8) }}">বিনোদন</a>
-                            </li>
-                            <li class="menu_page_id_536 menu_color_"><a class="dynamic "
-                                                                        href=""
-                                                                        target="_blank">ফিচার</a></li>
-                            <li class="menu_page_id_285 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 10) }}">জীবনযাপন</a>
-                            </li>
-                            <li class="menu_page_id_498 menu_color_"><a class="dynamic "
-                                                                        href="{{ route('category.post', 11) }}">বিজ্ঞান ও প্রযুক্তি
-                                </a>
-                            </li>
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'বাংলাদেশ'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'আন্তর্জাতিক'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'অর্থনীতি'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'মতামত'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'খেলা'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'বিনোদন'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'উত্তর আমেরিকা'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'জীবনযাপন'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
+                            @php
+                                $category = \App\Category::where(['status' => 1, 'name'=> 'বিজ্ঞান ও প্রযুক্তি'])->first();
+                            @endphp
+                            @if($category)
+                                <li class="menu_page_id_102 menu_color_"><a class="dynamic "
+                                                                            href="{{ route('category.post', $category->id) }}">{{ $category->name }}</a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                     <script type="text/javascript">

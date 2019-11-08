@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
+@php
+    $setting = \App\Setting::orderBy('id', 'DESC')->first();
+@endphp
 @section('page-title')
-    Dashboard - Stock Management
+    Dashboard - @if($setting) {{ $setting->site_title }} @endif
 @endsection
 
 @section('page-heading')
@@ -18,10 +21,15 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Suppliers
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Posts
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                {{--{{ \App\Supplier::where('status', '1')->count() }}--}}
+                                @php
+                                    $posts = \App\Post::where('status', '1')->count();
+                                @endphp
+                                @if($posts)
+                                    {{ $posts }}
+                                @endif
                             </div>
                         </div>
                         <div class="col-auto">
@@ -61,14 +69,21 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Categories</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
+                                    @php
+                                        $category = \App\Category::where('status', '1')->count();
+                                    @endphp
                                     <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                        {{--{{ \App\Category::where('status', '1')->count() }}--}}
+                                        @if($category)
+                                            {{ $category }}
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col">
                                     <div class="progress progress-sm mr-2">
                                         <div class="progress-bar bg-info" role="progressbar" style="width: 50%"
-                                             aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                             aria-valuenow="@if($category)
+                                             {{ $category }}
+                                             @endif" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>

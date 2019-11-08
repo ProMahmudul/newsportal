@@ -18,5 +18,8 @@ class Post extends Model
         return $this->belongsTo('App\User');
     }
 
-
+    public function local_post()
+    {
+        return $this->hasOne('App\LocalPost');
+    }
 }

@@ -2,10 +2,13 @@
 
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center py-5" href="{{ route('dashboard') }}">
+        @php
+            $setting = \App\Setting::orderBy('id', 'DESC')->first();
+        @endphp
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            <img src="@if($setting) {{ Storage::url($setting->favicon) }} @endif" alt="@if($setting) {{ $setting->site_title }} @endif" width="40">
         </div>
-        <div class="sidebar-brand-text mx-3">Prothom <sup>Alo</sup></div>
+        <div class="sidebar-brand-text mx-3">@if($setting) {{ $setting->site_title }} @endif</div>
     </a>
 
     <!-- Divider -->
@@ -54,6 +57,13 @@
             </div>
         </div>
     </li>
+
+    <!-- Settings Collapse Menu -->
+    {{--<li class="nav-item">--}}
+        {{--<a class="nav-link" href="{{ route('settings') }}">--}}
+            {{--<i class="fas fa-fw fa-chart-area"></i>--}}
+            {{--<span>Settings</span></a>--}}
+    {{--</li>--}}
 
     <!-- Divider -->
     <hr class="sidebar-divider">

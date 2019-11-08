@@ -299,14 +299,16 @@
                                                                 </div>
                                                                 <div class="right_part">
                                                                     <div class="col_in">
+
                                                                         <article itemscope
                                                                                  itemtype="http://schema.org/Article"
                                                                                  class="jw_detail_content_holder content mb16">
+
                                                                             <div itemprop="articleBody"
                                                                                  class="viewport">
-                                                                                <noscript id="ari-noscript">
+                                                                                {{--<noscript id="ari-noscript">--}}
 
-                                                                                </noscript>
+                                                                                {{--</noscript>--}}
                                                                                 <p class="alignfull"><img
                                                                                             class="jwMediaContent image aligncenter"
                                                                                             title="{{ $post->title }}"
@@ -317,6 +319,7 @@
 
                                                                                 </p>
                                                                                 {!! $post->description !!}
+
                                                                             </div>
                                                                             <script type="text/javascript">
                                                                                 //console.log(current_page_url);
@@ -486,13 +489,14 @@
                                                     <div class="col_in">
                                                         <div class="listing">
                                                             @php
-                                                                $cat_count = App\Post::where(['status' => 1, 'category_id' => $post->category->id])->get()->count();
-                                                                if ($cat_count >= 5) {
-                                                                    $rand_num = 5;
+                                                                $post_count = App\Post::where(['status' => 1, 'category_id' => $post->category->id])->get()->count();
+                                                                if ($post_count >= 5) {
+                                                                    $take_num = 5;
                                                                 } else {
-                                                                    $rand_num = $cat_count;
+                                                                    $take_num = $post_count;
                                                                 }
-                                                                $cat_posts = App\Post::where(['status' => 1, 'category_id' => $post->category->id])->get()->random($rand_num);
+                                                                $last_post = App\Post::where(['status' => 1, 'category_id' => $post->category->id])->orderBy('id', 'DESC')->first();
+                                                                $cat_posts = App\Post::where(['status' => 1, 'category_id' => $post->category->id])->orderBy('id', 'DESC')->get()->except($last_post->id)->take($take_num);
                                                             @endphp
                                                             @foreach($cat_posts as $cat_post)
                                                                 <div class="each col_in
@@ -508,9 +512,9 @@
                                                                        href="{{ route('single.post', $cat_post->id) }}"></a>
                                                                     <!--image-->
                                                                     <div class="image">
-                                                                        <noscript id="ari-image-569781619923"
-                                                                                  data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/84d22bd4b3c5595c4278a461d29c8d4c-5da9ae2b10bd1.jpg?jadewits_media_id=1478789&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09ae\u09cd\u09af\u09be\u099a \u09aa\u09be\u09a4\u09bf\u09df\u09c7\u099b\u09bf\u09b2\u09c7\u09a8 \u09b8\u09cd\u09af\u09be\u09b0 \u0985\u09cd\u09af\u09be\u09b2\u09c7\u0995\u09cd\u09b8 \u09ab\u09be\u09b0\u09cd\u0997\u09c1\u09b8\u09a8&quot;}">
-                                                                        </noscript>
+                                                                        {{--<noscript id="ari-image-569781619923"--}}
+                                                                                  {{--data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/84d22bd4b3c5595c4278a461d29c8d4c-5da9ae2b10bd1.jpg?jadewits_media_id=1478789&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09ae\u09cd\u09af\u09be\u099a \u09aa\u09be\u09a4\u09bf\u09df\u09c7\u099b\u09bf\u09b2\u09c7\u09a8 \u09b8\u09cd\u09af\u09be\u09b0 \u0985\u09cd\u09af\u09be\u09b2\u09c7\u0995\u09cd\u09b8 \u09ab\u09be\u09b0\u09cd\u0997\u09c1\u09b8\u09a8&quot;}">--}}
+                                                                        {{--</noscript>--}}
                                                                         <img src="{{ Storage::url($cat_post->image) }}"
                                                                              alt="{{ $cat_post->title }}"/>
                                                                         <script data-id="ari-image-569781619923">
@@ -753,9 +757,9 @@
                                                                    href="{{ route('single.post',$previous->id) }}"></a>
                                                                 <!--image-->
                                                                 <div class="image">
-                                                                    <noscript id="ari-image-741761619929"
-                                                                              data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/836664fb2de20a5d985c3a7365f1ab1f-5da9ba5066413.jpg?jadewits_media_id=1478801&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09b8\u09cc\u09b0\u09ad \u09b2\u09bf\u0996\u09c7\u099b\u09bf\u09b2\u09c7\u09a8 \u09b6\u09c7\u0996 \u09b9\u09be\u09b8\u09bf\u09a8\u09be\u09b0 \u09b8\u09cd\u09a8\u09c7\u09b9\u09c7\u09b0 \u0995\u09a5\u09be&quot;}">
-                                                                    </noscript>
+                                                                    {{--<noscript id="ari-image-741761619929"--}}
+                                                                              {{--data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/836664fb2de20a5d985c3a7365f1ab1f-5da9ba5066413.jpg?jadewits_media_id=1478801&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09b8\u09cc\u09b0\u09ad \u09b2\u09bf\u0996\u09c7\u099b\u09bf\u09b2\u09c7\u09a8 \u09b6\u09c7\u0996 \u09b9\u09be\u09b8\u09bf\u09a8\u09be\u09b0 \u09b8\u09cd\u09a8\u09c7\u09b9\u09c7\u09b0 \u0995\u09a5\u09be&quot;}">--}}
+                                                                    {{--</noscript>--}}
                                                                     <img src="{{ Storage::url($previous->image) }}"
                                                                          alt="{{ $previous->title }}"/>
                                                                     <script data-id="ari-image-741761619929">
@@ -802,9 +806,9 @@
                                                                    href="{{ route('single.post', $next->id) }}"></a>
                                                                 <!--image-->
                                                                 <div class="image">
-                                                                    <noscript id="ari-image-741761619935"
-                                                                              data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/8144eb277af4bdcd356975dfaea9e076-5da9c67fbcc58.jpg?jadewits_media_id=1478808&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09a7\u09cb\u09a8\u09bf \u09a8\u09bf\u099c\u09c7 \u0995\u09c0 \u099a\u09be\u09df, \u09a4\u09be \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cc\u09b0\u09ad\u09c7\u09b0 \u0995\u09be\u099b\u09c7&quot;}">
-                                                                    </noscript>
+                                                                    {{--<noscript id="ari-image-741761619935"--}}
+                                                                              {{--data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/8144eb277af4bdcd356975dfaea9e076-5da9c67fbcc58.jpg?jadewits_media_id=1478808&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09a7\u09cb\u09a8\u09bf \u09a8\u09bf\u099c\u09c7 \u0995\u09c0 \u099a\u09be\u09df, \u09a4\u09be \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cc\u09b0\u09ad\u09c7\u09b0 \u0995\u09be\u099b\u09c7&quot;}">--}}
+                                                                    {{--</noscript>--}}
                                                                     <img src="{{ Storage::url($next->image) }}"
                                                                          alt="{{ $next->title }}"/>
                                                                     <script data-id="ari-image-741761619935">
@@ -897,9 +901,9 @@
                                                                href="{{ route('single.post', $post->id) }}"></a>
                                                             <!--image-->
                                                             <div class="image">
-                                                                <noscript id="ari-image-1000601619931"
-                                                                          data-ari="{&quot;path&quot;:&quot;media\/2019\/07\/22\/c4506c1bb6dcf4daeae41077cd3c9802-5d358105133f2.jpg?jadewits_media_id=1457084&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u0990\u0995\u09cd\u09af \u099a\u09be\u0987\u09b2\u09c7 \u09ac\u09bf\u09ad\u09c7\u09a6 \u09b8\u09c3\u09b7\u09cd\u099f\u09bf \u0995\u09b0\u09be \u09b9\u09df: \u09a1. \u0995\u09be\u09ae\u09be\u09b2&quot;}">
-                                                                </noscript>
+                                                                {{--<noscript id="ari-image-1000601619931"--}}
+                                                                          {{--data-ari="{&quot;path&quot;:&quot;media\/2019\/07\/22\/c4506c1bb6dcf4daeae41077cd3c9802-5d358105133f2.jpg?jadewits_media_id=1457084&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u0990\u0995\u09cd\u09af \u099a\u09be\u0987\u09b2\u09c7 \u09ac\u09bf\u09ad\u09c7\u09a6 \u09b8\u09c3\u09b7\u09cd\u099f\u09bf \u0995\u09b0\u09be \u09b9\u09df: \u09a1. \u0995\u09be\u09ae\u09be\u09b2&quot;}">--}}
+                                                                {{--</noscript>--}}
                                                                 <img src="{{ Storage::url($post->image) }}"
                                                                      alt="{{ $post->title }}"/>
                                                                 <script data-id="ari-image-1000601619931">
@@ -984,9 +988,9 @@
                                                                href="{{ route('single.post', $post->id) }}"></a>
                                                             <!--image-->
                                                             <div class="image">
-                                                                <noscript id="ari-image-704361619935"
-                                                                          data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/8144eb277af4bdcd356975dfaea9e076-5da9c67fbcc58.jpg?jadewits_media_id=1478808&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09a7\u09cb\u09a8\u09bf \u09a8\u09bf\u099c\u09c7 \u0995\u09c0 \u099a\u09be\u09df, \u09a4\u09be \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cc\u09b0\u09ad\u09c7\u09b0 \u0995\u09be\u099b\u09c7&quot;}">
-                                                                </noscript>
+                                                                {{--<noscript id="ari-image-704361619935"--}}
+                                                                          {{--data-ari="{&quot;path&quot;:&quot;media\/2019\/10\/18\/8144eb277af4bdcd356975dfaea9e076-5da9c67fbcc58.jpg?jadewits_media_id=1478808&quot;,&quot;ratio&quot;:[16,9],&quot;alt&quot;:&quot;\u09a7\u09cb\u09a8\u09bf \u09a8\u09bf\u099c\u09c7 \u0995\u09c0 \u099a\u09be\u09df, \u09a4\u09be \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cc\u09b0\u09ad\u09c7\u09b0 \u0995\u09be\u099b\u09c7&quot;}">--}}
+                                                                {{--</noscript>--}}
                                                                 <img src="{{ Storage::url($post->image) }}"
                                                                      alt="{{ $post->title }}"/>
                                                                 <script data-id="ari-image-704361619935">

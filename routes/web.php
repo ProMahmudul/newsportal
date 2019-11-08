@@ -27,9 +27,12 @@ Route::prefix('/lv-admin')->group(function () {
         Route::get('/', 'PostController@manage')->name('post.manage');
 //    Route::get('/unpublished/{id}', 'PostController@unpublished')->name('brand.unpublished');
 //    Route::get('/published/{id}', 'PostController@published')->name('brand.published');
-    Route::get('/edit/{id}', 'PostController@edit')->name('post.edit');
-    Route::post('/update', 'PostController@update')->name('post.update');
+        Route::get('/edit/{id}', 'PostController@edit')->name('post.edit');
+        Route::post('/update', 'PostController@update')->name('post.update');
         Route::post('/delete', 'PostController@delete')->name('post.delete');
+        Route::get('/json-divisions/{id}', 'PostController@divisions');
+        Route::get('/json-districts/{id}', 'PostController@districts');
+        Route::get('/json-upazilas/{id}', 'PostController@upazilas');
     });
 
     /**
@@ -43,6 +46,17 @@ Route::prefix('/lv-admin')->group(function () {
         Route::post('/update', 'CategoryController@update')->name('category.update');
         Route::post('/delete', 'CategoryController@delete')->name('category.delete');
     });
+
+    /**
+     * Settings
+     */
+    Route::prefix('settings')->group(function () {
+        Route::get('/', 'SettingsController@index')->name('settings');
+        Route::post('/update', 'SettingsController@update')->name('update');
+    });
+
+    Route::get('change-password', 'SettingsController@changePassword')->name('change.password');
+    Route::post('change-password', 'SettingsController@updatePassword')->name('update.password');
 });
 
 /**
@@ -52,3 +66,8 @@ Route::prefix('/lv-admin')->group(function () {
 Route::get('/', 'FrontEndController@index');
 Route::get('post/{id}', 'FrontEndController@single_post')->name('single.post');
 Route::get('category/{id}', 'FrontEndController@category_post')->name('category.post');
+Route::get('get-district', 'FrontEndController@getDistrict')->name('get-district');
+Route::post('/bangladesh/posts', 'FrontEndController@posts_search')->name('posts_search');
+Route::get('/json-divisions/{id}', 'FrontEndController@divisions');
+Route::get('/json-districts/{id}', 'FrontEndController@districts');
+Route::get('/json-upazilas/{id}', 'FrontEndController@upazilas');

@@ -4,8 +4,11 @@
     <link rel="stylesheet" href="{{ asset('admin') }}/vendor/datatables/dataTables.bootstrap4.min.css">
 @endsection
 
+@php
+    $setting = \App\Setting::orderBy('id', 'DESC')->first();
+@endphp
 @section('page-title')
-    Posts - Prothom Alo
+    Posts - @if($setting) {{ $setting->site_title }} @endif
 @endsection
 
 @section('page-heading')
@@ -32,7 +35,7 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-sm-flex justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">Manage post information</h6>
-            <a href="#" class="btn btn-primary btn-icon-split btn-sm" data-toggle="modal" data-target="#modal" onclick="create()">
+            <a href="{{ route('post') }}" class="btn btn-primary btn-icon-split btn-sm">
                     <span class="icon">
                       <i class="fas fa-plus-square"></i>
                     </span>
