@@ -232,7 +232,7 @@
                             {{--$posts = \App\Post::where('status', 1)->orderBy('id', 'DESC')->get()->except($l_id)->take(4);--}}
                             {{--@endphp--}}
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'বাংলাদেশ'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '3'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -240,7 +240,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'আন্তর্জাতিক'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '4'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -248,7 +248,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'অর্থনীতি'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '5'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -256,7 +256,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'মতামত'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '16'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -264,7 +264,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'খেলা'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '6'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -272,7 +272,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'বিনোদন'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '8'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -280,7 +280,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'উত্তর আমেরিকা'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '18'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -288,7 +288,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'জীবনযাপন'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '10'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -296,7 +296,7 @@
                                 </li>
                             @endif
                             @php
-                                $category = \App\Category::where(['status' => 1, 'name'=> 'বিজ্ঞান ও প্রযুক্তি'])->first();
+                                $category = \App\Category::where(['status' => 1, 'id'=> '11'])->first();
                             @endphp
                             @if($category)
                                 <li class="menu_page_id_102 menu_color_"><a class="dynamic "
@@ -319,24 +319,25 @@
 <div class="header_white_wrap">
     <!--date and search area -->
     <div class="body_timebar container">
-        <span class="location"> Dhaka</span>
+        <span class="location"> ঢাকা</span>
         <span class="date_year">
             @php
-                $mytime = Carbon\Carbon::now();
-echo $mytime->toDateTimeString();
+                use EasyBanglaDate\Types\DateTime;
+                use EasyBanglaDate\Types\BnDateTime;
+                    $date = new DateTime('now', new DateTimeZone('Asia/Dhaka'));
+                    $bongabda = new BnDateTime('now', new DateTimeZone('Asia/Dhaka'));
+                    echo $date->format('l jS F Y b h:i:s');
+                    echo ", ";
+                    echo $bongabda->format('jS F Y');
             @endphp
         </span>
-        <span class="update_time"><a href="{{ asset('frontend') }}/assets/#">Being update
+        <span class="update_time"><a href="{{ asset('frontend') }}/assets/#">আপডেট
                 @php
                     $post = \App\Post::where('status', 1)->orderBy('id', 'DESC')->first();
-
-                       $to = \Carbon\Carbon::now();
-                       $from = \Carbon\Carbon::createFromFormat('Y-m-d H:s:i', $post->created_at);
-
-                       $diff_in_minutes = $to->diffInHours($from);
-                       print_r($diff_in_minutes);
+                $date = new DateTime($post->created_at, new DateTimeZone('Asia/Dhaka'));
+                echo $date->format('l jS F Y b h:i:s');
                 @endphp
-                hours ago.
+                আগে.
             </a></span>
     </div>
 </div>

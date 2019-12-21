@@ -276,17 +276,23 @@
                                                                                         class='name'>{{ $post->category->name }} প্রতিবেদক</span>
                                                                             </div>
                                                                             <div class="time each_row">
-                                                                                <!--আপডেট:-->
-                                                                                <span itemprop="datePublished"
-                                                                                      content="2019-10-18T19:48:00+06:00">{{ $post->created_at->format('d m Y, H:m ') }}</span>
-                                                                                <br> Update:
-                                                                                <span itemprop="dateModified"
-                                                                                      content="2019-10-18T19:50:49+06:00">{{ $post->updated_at->format('d m Y, H:m ') }}</span>
+{{--                                                                                @php \Illuminate\Support\Carbon::setLocale(LC_TIME, 'French'); @endphp--}}
+{{--                                                                                @php echo bangla_date(strtotime($post->created_at), "en"); @endphp--}}
+                                                                                @php
+                                                                                    use EasyBanglaDate\Types\DateTime;
+                                                                                @endphp
+                                                                                <span itemprop="datePublished">@php $date = new DateTime($post->created_at, new DateTimeZone('Asia/Dhaka'));
+                                                                                    echo $date->format('l jS F Y b h:i:s'); @endphp</span>
+                                                                                <br> আপডেট:
+                                                                                <span itemprop="dateModified">@php $date = new DateTime($post->updated_at, new DateTimeZone('Asia/Dhaka'));
+                                                                                    echo $date->format('l jS F Y b h:i:s'); @endphp</span>
                                                                             </div>
                                                                             <div class="each_row do_not_print">
                                                                                 <div class="social_shares roundicons"
                                                                                      data-show="print,facebook,twitter,viber,whatsapp"
-                                                                                     data-hide=""></div>
+                                                                                     data-hide="">
+                                                                                </div>
+
                                                                             </div>
                                                                             <div class="comment_and_like each_row dn do_not_print">
                                                                             </div>
